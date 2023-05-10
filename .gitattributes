@@ -1,2 +1,12 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+/obj/Debug
+/bin/Debug
+/.vs
