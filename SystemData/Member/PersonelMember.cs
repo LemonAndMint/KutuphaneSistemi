@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KutuphaneSistemi.SystemData.Member
 {
-    public class PersonelMember : Member
+    public class PersonelMember : NormalMember
     {
         public Image PersonelPicture { get; set; }
         public string PersonelTitle { get; set; }

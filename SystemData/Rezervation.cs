@@ -9,7 +9,7 @@ namespace KutuphaneSistemi.SystemData
 {
     public class Rezervation : Data
     {
-        public Member.Member member { get; }
+        public NormalMember member { get; }
 
     }
 }

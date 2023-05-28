@@ -10,7 +10,7 @@ namespace KutuphaneSistemi.SystemData
     public class Book : Data
     {
         public int BookISBN { get; set; }
-        public int BookAssetNumber { get; } //Demirbas Numarasi, kitap ilk kayit edildiginde rastgele verilir ve bidaha degistirilemez. / Corpyr
+        public string BookAssetNumber { get; } //Demirbas Numarasi, kitap ilk kayit edildiginde rastgele verilir ve bidaha degistirilemez. / Corpyr
         public string BookName { get; set; }
         public string BookAuthor { get; set; }
         public string BookCategory { get; set; }

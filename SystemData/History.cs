@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KutuphaneSistemi.SystemData
 {
-    public class History: Data
+    public class SystemHistory: Data
     {
     }
 }
