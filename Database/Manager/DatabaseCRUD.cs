@@ -25,7 +25,7 @@ namespace KutuphaneSistemi.Database.Manager
          * kullanilacak veri ve database ile veri sinifleri arasindaki baglantiyi kuracak olan entity framework 
          * generic olarak yazilmistir. / Corpyr
          */
-        static public void createFrom<T>(DbSet<T> entities,T data, DatabaseConnector connector) where T : Data {
+        static public void createFrom<T>(DbSet<T> entities,T data) where T : Data {
 
             /*if(connector.connector.State == ConnectionState.Closed)
             {
@@ -56,7 +56,7 @@ namespace KutuphaneSistemi.Database.Manager
          * 
          * Burda sadece okuma yaptigimizdan herhangi bir veri girisi almak yerine bir query aldik. / Corpyr
          */
-        static public List<Data> readFrom<T>(DbSet<T> entities, Expression<Func<T, bool>> query, DatabaseConnector connector) where T : Data {
+        static public List<Data> readFrom<T>(DbSet<T> entities, Expression<Func<T, bool>> query) where T : Data {
 
             List<Data> resultDataList = null;
 
@@ -77,7 +77,7 @@ namespace KutuphaneSistemi.Database.Manager
 
             return resultDataList;
         }
-        static public void updateFrom<T> (DbSet<T> entities, T data, DatabaseConnector connector) where T : Data {
+        static public void updateFrom<T> (DbSet<T> entities, T data) where T : Data {
 
             try
             {
@@ -95,7 +95,7 @@ namespace KutuphaneSistemi.Database.Manager
             }
 
         }
-        static public void deleteFrom<T>(DbSet<T> entities, T data, DatabaseConnector connector) where T : Data {
+        static public void deleteFrom<T>(DbSet<T> entities, T data) where T : Data {
 
             try
             {
