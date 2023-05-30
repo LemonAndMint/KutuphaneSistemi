@@ -20,6 +20,7 @@ namespace KutuphaneSistemi.Database.Manager
 {
     static public class DatabaseCRUD
     {
+
         /*
          * Bu sinifta olusturulmus metodlarda CRUD islemlerinin genellestirilmesi icin 
          * kullanilacak veri ve database ile veri sinifleri arasindaki baglantiyi kuracak olan entity framework 
@@ -76,6 +77,10 @@ namespace KutuphaneSistemi.Database.Manager
 
             return resultDataList;
         }
+
+        /* create ve update islemlerinin ayri ayri yazilmasinin nedeni CRUD
+         * yapisinin korunmasi ve okunabilirliginj arttirilmasidir. \ Corpyr
+         */
         static public void updateFrom<T> (DbSet<T> entities, T data) where T : Data {
 
             try
@@ -112,5 +117,6 @@ namespace KutuphaneSistemi.Database.Manager
             }
 
         }
+      
     }
 }

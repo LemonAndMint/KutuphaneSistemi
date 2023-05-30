@@ -39,61 +39,146 @@ namespace KutuphaneSistemi.Database.Manager
                 return instance;
             }
         }
-        /*
-         * listData metodu icin reflection kullanmayi denedik fakat DatabaseContext sinifindaki
-         * DBSet degiskenlerinin kullanimi Invoke ile mumkun olmadi. Kullansaydik yine bir switch/case yapisi 
-         * kurmamiz gerekeceginden su anki yapiya donduk. \ Corpyr.
-         */
-        public List<Data> listData<T>(T data, List<String> variableNames, List<String> searchValues)
-        {
-
-            String query = null;
-            List<Data> result = null;
+        public void createData<T>(T data) where T : Data {
 
             context = new DatabaseContext();
 
-            switch (data)
+            if (typeof(T) == typeof(Book))
             {
-                case Book:
+                /* data once object tipine sonrasinda Book tipine donusturulur. 
+                 * bu donusturme asagisi icin de gecerlidir. \ Corpyr
+                 */
+                DatabaseCRUD.createFrom<Book>(context.Book, (Book)(object)data);
+            }
+            else if (typeof(T) == typeof(SystemHistory))
+            {
+                DatabaseCRUD.createFrom<SystemHistory>(context.SystemHistory, (SystemHistory)(object)data);
+            }
+            else if (typeof(T) == typeof(Rezervation))
+            {
+                DatabaseCRUD.createFrom<Rezervation>(context.Rezervation, (Rezervation)(object)data);
+            }
+            else if (typeof(T) == typeof(PersonelMember))
+            {
+                DatabaseCRUD.createFrom<PersonelMember>(context.PersonelMember, (PersonelMember)(object)data);
+            }
+            else if (typeof(T) == typeof(NormalMember))
+            {
+                DatabaseCRUD.createFrom<NormalMember>(context.NormalMember, (NormalMember)(object)data);
+            }
+            else
+            {
+                new Exception();
+            }
+        }
 
-                    query = Parser.unparseAdd<Book>(variableNames, searchValues);
-                    result = DatabaseCRUD.readFrom<Book>(context.Book, query);
-                        break;
+        /*
+         * listData metodu icin switch/case yapisi kullanilamadi. Type degiskenleri
+         * switch/case yapisinda pattern type'larla karsilastirilamiyor. \ Corpyr
+         */
+        public List<Data> listData<T>(List<String> variableNames, List<String> searchValues) where T : Data
+        {
+            context = new DatabaseContext();
+            
+            List<Data> result = null;
+            String query = Parser.unparseAdd<T>(variableNames, searchValues);
 
-                case SystemHistory:
-
-                    query = Parser.unparseAdd<SystemHistory>(variableNames, searchValues);
-                    result = DatabaseCRUD.readFrom<SystemHistory>(context.SystemHistory, query);
-                    break;
-
-                case Rezervation:
-
-                    query = Parser.unparseAdd<SystemHistory>(variableNames, searchValues);
-                    result = DatabaseCRUD.readFrom<SystemHistory>(context.SystemHistory, query);
-                    break;
-
-                case PersonelMember: //Her zaman ustte olmak zorunda cunku NormalMember parent. \Corpyr.
-
-                    query = Parser.unparseAdd<PersonelMember>(variableNames, searchValues);
-                    result = DatabaseCRUD.readFrom<PersonelMember>(context.PersonelMember, query);
-                    break;
-
-                case NormalMember:
-                    
-                    query = Parser.unparseAdd<NormalMember>(variableNames, searchValues);
-                    result = DatabaseCRUD.readFrom<NormalMember>(context.NormalMember, query);
-                    
-                    break;
-
-                default:
-
-                    new Exception();
-                    break;
+            if (typeof(T) == typeof(Book))
+            {
+                result = DatabaseCRUD.readFrom<Book>(context.Book, query);
+            }
+            else if (typeof(T) == typeof(SystemHistory))
+            {
+                result = DatabaseCRUD.readFrom<SystemHistory>(context.SystemHistory, query);
+            }
+            else if (typeof(T) == typeof(Rezervation))
+            {
+                result = DatabaseCRUD.readFrom<Rezervation>(context.Rezervation, query);
+            }
+            else if (typeof(T) == typeof(PersonelMember))
+            {
+                result = DatabaseCRUD.readFrom<PersonelMember>(context.PersonelMember, query);
+            }
+            else if (typeof(T) == typeof(NormalMember))
+            {
+                result = DatabaseCRUD.readFrom<NormalMember>(context.NormalMember, query);
+            }
+            else
+            {
+                new Exception();
             }
 
             return result;
-            
+          
         }
+
+        public void updateData<T>(T data) where T : Data
+        {
+            context = new DatabaseContext();
+
+            if (typeof(T) == typeof(Book))
+            {
+                /* data once object tipine sonrasinda Book tipine donusturulur. 
+                 * bu donusturme asagisi icin de gecerlidir. \ Corpyr
+                 */
+                DatabaseCRUD.updateFrom<Book>(context.Book, (Book)(object)data);
+            }
+            else if (typeof(T) == typeof(SystemHistory))
+            {
+                DatabaseCRUD.updateFrom<SystemHistory>(context.SystemHistory, (SystemHistory)(object)data);
+            }
+            else if (typeof(T) == typeof(Rezervation))
+            {
+                DatabaseCRUD.updateFrom<Rezervation>(context.Rezervation, (Rezervation)(object)data);
+            }
+            else if (typeof(T) == typeof(PersonelMember))
+            {
+                DatabaseCRUD.updateFrom<PersonelMember>(context.PersonelMember, (PersonelMember)(object)data);
+            }
+            else if (typeof(T) == typeof(NormalMember))
+            {
+                DatabaseCRUD.updateFrom<NormalMember>(context.NormalMember, (NormalMember)(object)data);
+            }
+            else
+            {
+                new Exception();
+            }
+        }
+        public void deleteData<T>(T data) where T : Data
+        {
+            context = new DatabaseContext();
+
+            if (typeof(T) == typeof(Book))
+            {
+                /* data once object tipine sonrasinda Book tipine donusturulur. 
+                 * bu donusturme asagisi icin de gecerlidir. \ Corpyr
+                 */
+                DatabaseCRUD.deleteFrom<Book>(context.Book, (Book)(object)data);
+            }
+            else if (typeof(T) == typeof(SystemHistory))
+            {
+                DatabaseCRUD.deleteFrom<SystemHistory>(context.SystemHistory, (SystemHistory)(object)data);
+            }
+            else if (typeof(T) == typeof(Rezervation))
+            {
+                DatabaseCRUD.deleteFrom<Rezervation>(context.Rezervation, (Rezervation)(object)data);
+            }
+            else if (typeof(T) == typeof(PersonelMember))
+            {
+                DatabaseCRUD.deleteFrom<PersonelMember>(context.PersonelMember, (PersonelMember)(object)data);
+            }
+            else if (typeof(T) == typeof(NormalMember))
+            {
+                DatabaseCRUD.deleteFrom<NormalMember>(context.NormalMember, (NormalMember)(object)data);
+            }
+            else
+            {
+                new Exception();
+            }
+        }
+
+
+
 
     }
 }
