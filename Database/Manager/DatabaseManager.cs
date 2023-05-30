@@ -11,6 +11,10 @@ using KutuphaneSistemi.Database.Connection;
 using KutuphaneSistemi.Database.EntityFramework;
 using KutuphaneSistemi.SystemData;
 using KutuphaneSistemi.SystemData.Member;
+using KutuphaneSistemi.WinUI;
+using System.Reflection;
+using System.Diagnostics;
+using MySqlX.XDevAPI.Common;
 
 namespace KutuphaneSistemi.Database.Manager
 {
@@ -35,30 +39,59 @@ namespace KutuphaneSistemi.Database.Manager
                 return instance;
             }
         }
-
-        public String listData<T>(T data, List<String> variableNames, List<String> searchValues)
+        /*
+         * listData metodu icin reflection kullanmayi denedik fakat DatabaseContext sinifindaki
+         * DBSet degiskenlerinin kullanimi Invoke ile mumkun olmadi. Kullansaydik yine bir switch/case yapisi 
+         * kurmamiz gerekeceginden su anki yapiya donduk. \ Corpyr.
+         */
+        public List<Data> listData<T>(T data, List<String> variableNames, List<String> searchValues)
         {
 
-
+            String query = null;
+            List<Data> result = null;
 
             context = new DatabaseContext();
 
             switch (data)
             {
                 case Book:
-                    DatabaseCRUD.readFrom<Book>(context.Book, )
+
+                    query = Parser.unparseAdd<Book>(variableNames, searchValues);
+                    result = DatabaseCRUD.readFrom<Book>(context.Book, query);
                         break;
+
                 case SystemHistory:
+
+                    query = Parser.unparseAdd<SystemHistory>(variableNames, searchValues);
+                    result = DatabaseCRUD.readFrom<SystemHistory>(context.SystemHistory, query);
+                    break;
 
                 case Rezervation:
 
-                case NormalMember: 
+                    query = Parser.unparseAdd<SystemHistory>(variableNames, searchValues);
+                    result = DatabaseCRUD.readFrom<SystemHistory>(context.SystemHistory, query);
+                    break;
 
+                case PersonelMember: //Her zaman ustte olmak zorunda cunku NormalMember parent. \Corpyr.
+
+                    query = Parser.unparseAdd<PersonelMember>(variableNames, searchValues);
+                    result = DatabaseCRUD.readFrom<PersonelMember>(context.PersonelMember, query);
+                    break;
+
+                case NormalMember:
+                    
+                    query = Parser.unparseAdd<NormalMember>(variableNames, searchValues);
+                    result = DatabaseCRUD.readFrom<NormalMember>(context.NormalMember, query);
+                    
+                    break;
 
                 default:
+
+                    new Exception();
                     break;
             }
 
+            return result;
             
         }
 

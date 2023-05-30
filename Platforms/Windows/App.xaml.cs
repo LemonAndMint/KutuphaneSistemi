@@ -18,7 +18,7 @@ public partial class App : MauiWinUIApplication
 	{
 		this.InitializeComponent();
 
-		new TestBackEnd();
+		//new TestBackEnd();
 	}
 
 	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();

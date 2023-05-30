@@ -12,10 +12,10 @@ namespace KutuphaneSistemi.Database.EntityFramework
     public class DatabaseContext : DbContext
     {
         public DbSet<Book> Book { get; set; }
-        public DbSet<SystemHistory> History { get; set; }
+        public DbSet<SystemHistory> SystemHistory { get; set; }
         public DbSet<Rezervation> Rezervation { get; set; }
-        public DbSet<NormalMember> Member { get; set; }
-        public DbSet<PersonelMember> Personel { get; set; }
+        public DbSet<NormalMember> NormalMember { get; set; }
+        public DbSet<PersonelMember> PersonelMember { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

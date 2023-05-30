@@ -27,11 +27,6 @@ namespace KutuphaneSistemi.Database.Manager
          */
         static public void createFrom<T>(DbSet<T> entities,T data) where T : Data {
 
-            /*if(connector.connector.State == ConnectionState.Closed)
-            {
-                connector.OpenConnection(); #TODO bizim baglanti acmamiz gerekli mi 
-            }*/
-
             try
             {
                 using (DatabaseContext context = new DatabaseContext())
@@ -52,11 +47,15 @@ namespace KutuphaneSistemi.Database.Manager
         }
         /*
          * query degiskeni burda Parser tarafindan hazirlanacak olan bir arama istegidir. Normalde Linq ile kullanilan 
-         * arama isteklerini direkt metod icerisine yazmak yerine metoda degisken olarak atadık boylece metodları modulerlestirdik. 
+         * arama isteklerini direkt metod icerisine yazmak yerine metoda string degisken olarak atadık boylece metodu 
+         * modulerlestirdik. 
          * 
-         * Burda sadece okuma yaptigimizdan herhangi bir veri girisi almak yerine bir query aldik. / Corpyr
+         * Burda sadece okuma yaptigimizdan herhangi bir veri girisi almak yerine bir query aldik. 
+         * 
+         * Sadece bu metodda bir query degiskeni vardir cunku diger islemler komplike sql queryleri icermez.
+         * Entity Framework icerisindeki metodlari kullanabiliriz. / Corpyr
          */
-        static public List<Data> readFrom<T>(DbSet<T> entities, Expression<Func<T, bool>> query) where T : Data {
+        static public List<Data> readFrom<T>(DbSet<T> entities, String query) where T : Data {
 
             List<Data> resultDataList = null;
 
@@ -64,7 +63,7 @@ namespace KutuphaneSistemi.Database.Manager
             {
                 using (DatabaseContext context = new DatabaseContext())
                 {
-                   resultDataList = entities.Where(query).ToList<Data>();
+                   resultDataList = entities.SqlQuery(query).ToList<Data>();
                 }
             }
             catch (MySqlException sqlException)
