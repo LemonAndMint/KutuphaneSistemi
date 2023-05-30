@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Services.Maps;
 
-using KutuphaneSistemi.Database.Connection;
 using KutuphaneSistemi.Database.EntityFramework;
 using KutuphaneSistemi.SystemData;
 using KutuphaneSistemi.SystemData.Member;

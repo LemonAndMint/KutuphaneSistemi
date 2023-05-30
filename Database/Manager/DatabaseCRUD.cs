@@ -11,7 +11,6 @@ using System.Data.Entity.Migrations;
 
 using MySql.Data.MySqlClient;
 
-using KutuphaneSistemi.Database.Connection;
 using KutuphaneSistemi.Database.EntityFramework;
 using KutuphaneSistemi.SystemData.Member;
 using KutuphaneSistemi.SystemData;
