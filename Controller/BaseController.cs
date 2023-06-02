@@ -12,9 +12,10 @@ namespace KutuphaneSistemi.Controller
     {
         public DatabaseManager databaseManager { get; set; }
 
-        public void DestroyController()
+        public BaseController()
         {
-
+            databaseManager = new DatabaseManager();
         }
+
     }
 }
