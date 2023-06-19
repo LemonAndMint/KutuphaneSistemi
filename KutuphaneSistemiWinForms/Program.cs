@@ -1,6 +1,8 @@
-using KutuphaneSistemi.Controller;
-using KutuphaneSistemi.Database.EntityFramework;
-using KutuphaneSistemi.SystemData;
+using KutuphaneSistemiWinForms.Controller;
+using KutuphaneSistemiWinForms.Database.EntityFramework;
+using KutuphaneSistemiWinForms.SystemData;
+using KutuphaneSistemiWinForms.Displays.RezervationDisplay;
+using KutuphaneSistemiWinForms.Displays.MainMenu;
 
 namespace KutuphaneSistemiWinForms
 {
@@ -15,17 +17,8 @@ namespace KutuphaneSistemiWinForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
 
-            
-
-            /*DatabaseContext context = new DatabaseContext();
-            Book createBookw = new Book();
-            context.Book.Add(createBook);
-            context.SaveChanges(); */
-            
-            //#TODO Datalari ekle 
-
             ApplicationConfiguration.Initialize();
-            Application.Run(new BookRegisterDisplay());
+            Application.Run(new MainMenuDisplay());
 
         }
     }

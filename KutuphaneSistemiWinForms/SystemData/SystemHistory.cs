@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KutuphaneSistemi.SystemData
+namespace KutuphaneSistemiWinForms.SystemData
 {
-    public class SystemHistory: Data
+    public class SystemHistory : Data
     {
         [Key]
         public int historyID { get; set; }

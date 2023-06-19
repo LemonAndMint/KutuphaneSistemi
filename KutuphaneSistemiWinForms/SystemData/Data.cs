@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KutuphaneSistemi.SystemData
+namespace KutuphaneSistemiWinForms.SystemData
 {
     public class Data
     {

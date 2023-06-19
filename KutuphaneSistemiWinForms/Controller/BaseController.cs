@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KutuphaneSistemiWinForms.Database.Manager;
 
-using KutuphaneSistemi.Database.Manager;
-
-namespace KutuphaneSistemi.Controller
+namespace KutuphaneSistemiWinForms.Controller
 {
     public class BaseController
     {

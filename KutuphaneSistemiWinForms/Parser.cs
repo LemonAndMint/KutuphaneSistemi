@@ -5,40 +5,39 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using KutuphaneSistemiWinForms.SystemData;
 
-using KutuphaneSistemi.SystemData;
-
-namespace KutuphaneSistemi
+namespace KutuphaneSistemiWinForms
 {
     public static class Parser
     {
         //Bu parser kendisine gonderilen verileri AND sql querisine donusturur. \ Corpyr.
-        public static String unparseAdd<T>(List<String> variableNames, List<String> searchValues) where T: Data
+        public static string unparseAdd<T>(List<string> variableNames, List<string> searchValues) where T : Data
         {
-            if(variableNames.Count != searchValues.Count)
+            if (variableNames.Count != searchValues.Count)
             {
                 new ArgumentOutOfRangeException("Parser degiskenleri ayni buyuklukte degil!");
                 return null;
             }
 
-            String tableName = typeof(T).Name.ToLower();
+            string tableName = typeof(T).Name.ToLower();
 
-            String query = "select * from " + tableName + " where";
+            string query = "select * from " + tableName + " where";
 
-            for(int i = 0; i <= variableNames.Count() - 2; i++)
+            for (int i = 0; i <= variableNames.Count() - 2; i++)
             {
-                string tempQueryPiece = " " + variableNames[i] + "=" + "\"" + searchValues[i] + "\" " + "and";
+                string tempQueryPiece = " " + variableNames[i] + " = " + "\'" + searchValues[i] + "\' " + "and";
                 query += tempQueryPiece;
             }
 
             {
-                query += " " + variableNames[variableNames.Count - 1] + "=" + "\"" + searchValues[searchValues.Count - 1] + "\";";
+                query += " " + variableNames[variableNames.Count - 1] + " = " + "\'" + searchValues[searchValues.Count - 1] + "\'";
             }
 
             Debug.WriteLine(query);
 
             return query;
-        
+
         }
 
     }

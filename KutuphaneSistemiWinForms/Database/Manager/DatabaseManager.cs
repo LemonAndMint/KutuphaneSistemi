@@ -4,20 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using KutuphaneSistemi.Database.EntityFramework;
-using KutuphaneSistemi.SystemData;
-using KutuphaneSistemi.SystemData.Member;
 using System.Reflection;
 using System.Diagnostics;
+using KutuphaneSistemiWinForms.SystemData;
+using KutuphaneSistemiWinForms.SystemData.Member;
+using KutuphaneSistemiWinForms;
+using KutuphaneSistemiWinForms.Database.EntityFramework;
 
-namespace KutuphaneSistemi.Database.Manager
+namespace KutuphaneSistemiWinForms.Database.Manager
 {
     /*
      * DatabaseManager, veritabanina erisim ve islemleri icin kullanilacak olan siniftir.
      * Tum veritabani islemlerini tek bir siniftan erisim saglayacagiz. Singleton bir siniftir. / Corpyr
      */
-    public sealed class DatabaseManager 
+    public sealed class DatabaseManager
     {
         private static DatabaseManager instance = null;
         private DatabaseContext context;
@@ -29,12 +29,13 @@ namespace KutuphaneSistemi.Database.Manager
                 if (instance == null)
                 {
                     instance = new DatabaseManager();
-                    
+
                 }
                 return instance;
             }
         }
-        public void createData<T>(T data) where T : Data {
+        public void createData<T>(T data) where T : Data
+        {
 
             context = new DatabaseContext();
 
@@ -43,23 +44,19 @@ namespace KutuphaneSistemi.Database.Manager
                 /* data once object tipine sonrasinda Book tipine donusturulur. 
                  * bu donusturme asagisi icin de gecerlidir. \ Corpyr
                  */
-                DatabaseCRUD.createFrom<Book>(context.Book, (Book)(object)data);
+                DatabaseCRUD.createFrom(context.Book, (Book)(object)data);
             }
             else if (typeof(T) == typeof(SystemHistory))
             {
-                DatabaseCRUD.createFrom<SystemHistory>(context.SystemHistory, (SystemHistory)(object)data);
+                DatabaseCRUD.createFrom(context.SystemHistory, (SystemHistory)(object)data);
             }
             else if (typeof(T) == typeof(Rezervation))
             {
-                DatabaseCRUD.createFrom<Rezervation>(context.Rezervation, (Rezervation)(object)data);
-            }
-            else if (typeof(T) == typeof(PersonelMember))
-            {
-                DatabaseCRUD.createFrom<PersonelMember>(context.PersonelMember, (PersonelMember)(object)data);
+                DatabaseCRUD.createFrom(context.Rezervation, (Rezervation)(object)data);
             }
             else if (typeof(T) == typeof(NormalMember))
             {
-                DatabaseCRUD.createFrom<NormalMember>(context.NormalMember, (NormalMember)(object)data);
+                DatabaseCRUD.createFrom(context.NormalMember, (NormalMember)(object)data);
             }
             else
             {
@@ -75,32 +72,33 @@ namespace KutuphaneSistemi.Database.Manager
          * listData metodu icin switch/case yapisi kullanilamadi. Type degiskenleri
          * switch/case yapisinda pattern type'larla karsilastirilamiyor. \ Corpyr
          */
-        public List<Data> listData<T>(List<String> variableNames, List<String> searchValues) where T : Data
+        public List<Data> listData<T>(List<string> variableNames, List<string> searchValues) where T : Data
         {
+            if (variableNames == null || searchValues == null || variableNames.Count != searchValues.Count)
+            {
+                return null;
+            }
+
             context = new DatabaseContext();
-            
+
             List<Data> result = null;
-            String query = Parser.unparseAdd<T>(variableNames, searchValues);
+            string query = Parser.unparseAdd<T>(variableNames, searchValues);
 
             if (typeof(T) == typeof(Book))
             {
-                result = DatabaseCRUD.readFrom<Book>(context.Book, query);
+                result = DatabaseCRUD.readFrom(context.Book, query);
             }
             else if (typeof(T) == typeof(SystemHistory))
             {
-                result = DatabaseCRUD.readFrom<SystemHistory>(context.SystemHistory, query);
+                result = DatabaseCRUD.readFrom(context.SystemHistory, query);
             }
             else if (typeof(T) == typeof(Rezervation))
             {
-                result = DatabaseCRUD.readFrom<Rezervation>(context.Rezervation, query);
-            }
-            else if (typeof(T) == typeof(PersonelMember))
-            {
-                result = DatabaseCRUD.readFrom<PersonelMember>(context.PersonelMember, query);
+                result = DatabaseCRUD.readFrom(context.Rezervation, query);
             }
             else if (typeof(T) == typeof(NormalMember))
             {
-                result = DatabaseCRUD.readFrom<NormalMember>(context.NormalMember, query);
+                result = DatabaseCRUD.readFrom(context.NormalMember, query);
             }
             else
             {
@@ -109,7 +107,7 @@ namespace KutuphaneSistemi.Database.Manager
 
             }
             return result;
-          
+
         }
 
         public void updateData<T>(T data) where T : Data
@@ -121,23 +119,19 @@ namespace KutuphaneSistemi.Database.Manager
                 /* data once object tipine sonrasinda Book tipine donusturulur. 
                  * bu donusturme asagisi icin de gecerlidir. \ Corpyr
                  */
-                DatabaseCRUD.updateFrom<Book>(context.Book, (Book)(object)data);
+                DatabaseCRUD.updateFrom(context.Book, (Book)(object)data);
             }
             else if (typeof(T) == typeof(SystemHistory))
             {
-                DatabaseCRUD.updateFrom<SystemHistory>(context.SystemHistory, (SystemHistory)(object)data);
+                DatabaseCRUD.updateFrom(context.SystemHistory, (SystemHistory)(object)data);
             }
             else if (typeof(T) == typeof(Rezervation))
             {
-                DatabaseCRUD.updateFrom<Rezervation>(context.Rezervation, (Rezervation)(object)data);
-            }
-            else if (typeof(T) == typeof(PersonelMember))
-            {
-                DatabaseCRUD.updateFrom<PersonelMember>(context.PersonelMember, (PersonelMember)(object)data);
+                DatabaseCRUD.updateFrom(context.Rezervation, (Rezervation)(object)data);
             }
             else if (typeof(T) == typeof(NormalMember))
             {
-                DatabaseCRUD.updateFrom<NormalMember>(context.NormalMember, (NormalMember)(object)data);
+                DatabaseCRUD.updateFrom(context.NormalMember, (NormalMember)(object)data);
             }
             else
             {
@@ -156,23 +150,19 @@ namespace KutuphaneSistemi.Database.Manager
                 /* data once object tipine sonrasinda Book tipine donusturulur. 
                  * bu donusturme asagisi icin de gecerlidir. \ Corpyr
                  */
-                DatabaseCRUD.deleteFrom<Book>(context.Book, (Book)(object)data);
+                DatabaseCRUD.deleteFrom(context.Book, (Book)(object)data);
             }
             else if (typeof(T) == typeof(SystemHistory))
             {
-                DatabaseCRUD.deleteFrom<SystemHistory>(context.SystemHistory, (SystemHistory)(object)data);
+                DatabaseCRUD.deleteFrom(context.SystemHistory, (SystemHistory)(object)data);
             }
             else if (typeof(T) == typeof(Rezervation))
             {
-                DatabaseCRUD.deleteFrom<Rezervation>(context.Rezervation, (Rezervation)(object)data);
-            }
-            else if (typeof(T) == typeof(PersonelMember))
-            {
-                DatabaseCRUD.deleteFrom<PersonelMember>(context.PersonelMember, (PersonelMember)(object)data);
+                DatabaseCRUD.deleteFrom(context.Rezervation, (Rezervation)(object)data);
             }
             else if (typeof(T) == typeof(NormalMember))
             {
-                DatabaseCRUD.deleteFrom<NormalMember>(context.NormalMember, (NormalMember)(object)data);
+                DatabaseCRUD.deleteFrom(context.NormalMember, (NormalMember)(object)data);
             }
             else
             {
@@ -183,9 +173,6 @@ namespace KutuphaneSistemi.Database.Manager
             context.SaveChanges();
 
         }
-
-
-
 
     }
 }

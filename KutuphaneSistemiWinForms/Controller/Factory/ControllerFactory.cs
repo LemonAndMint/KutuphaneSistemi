@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KutuphaneSistemi.Controller.Factory
+namespace KutuphaneSistemiWinForms.Controller.Factory
 {
     public sealed class ControllerFactory
     {
@@ -22,18 +22,28 @@ namespace KutuphaneSistemi.Controller.Factory
             }
         }
 
-        public void createController(String controllerName)
+        public static BaseController createController(string controllerName)
         {
+            string procesedControllerName;
 
-        }
+            procesedControllerName = controllerName.Trim();
+            procesedControllerName = controllerName.ToLower();
 
-        public void destryCurrentControllers(String displayName)
-        {
-
-        }
-
-        public void destroyAllControllers()
-        {
+            switch (procesedControllerName)
+            {
+                case ("book"):
+                    return new BookController();
+                case ("history"):
+                    return new HistoryController();
+                case ("member"):
+                    return new MemberController();
+                case ("rezervation"):
+                    return new RezervationController();
+                case ("ui"):
+                    return new UIController();
+                default:
+                    return null;
+            }
 
         }
 

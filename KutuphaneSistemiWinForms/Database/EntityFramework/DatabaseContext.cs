@@ -5,13 +5,11 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-
-using KutuphaneSistemi.SystemData;
-using KutuphaneSistemi.SystemData.Member;
-
+using KutuphaneSistemiWinForms.SystemData;
+using KutuphaneSistemiWinForms.SystemData.Member;
 using Microsoft.EntityFrameworkCore;
 
-namespace KutuphaneSistemi.Database.EntityFramework
+namespace KutuphaneSistemiWinForms.Database.EntityFramework
 {
     public class DatabaseContext : DbContext
     {
@@ -19,8 +17,7 @@ namespace KutuphaneSistemi.Database.EntityFramework
         public DbSet<SystemHistory> SystemHistory { get; set; }
         public DbSet<Rezervation> Rezervation { get; set; }
         public DbSet<NormalMember> NormalMember { get; set; }
-        public DbSet<PersonelMember> PersonelMember { get; set; }
-      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

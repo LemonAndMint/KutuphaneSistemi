@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KutuphaneSistemi.Controller
+namespace KutuphaneSistemiWinForms.Controller
 {
-    public class UIController
+    public class UIController : BaseController
     {
-
         public void createPopUp()
         {
 

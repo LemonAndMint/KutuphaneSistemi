@@ -7,13 +7,13 @@ using System.Diagnostics;
 using System.Data;
 using System.Linq.Expressions;
 
-using KutuphaneSistemi.Database.EntityFramework;
-using KutuphaneSistemi.SystemData.Member;
-using KutuphaneSistemi.SystemData;
+using KutuphaneSistemiWinForms.Database.EntityFramework;
+using KutuphaneSistemiWinForms.SystemData.Member;
 
 using Microsoft.EntityFrameworkCore;
+using KutuphaneSistemiWinForms.SystemData;
 
-namespace KutuphaneSistemi.Database.Manager
+namespace KutuphaneSistemiWinForms.Database.Manager
 {
     static public class DatabaseCRUD
     {
@@ -23,7 +23,8 @@ namespace KutuphaneSistemi.Database.Manager
          * kullanilacak veri ve database ile veri sinifleri arasindaki baglantiyi kuracak olan entity framework 
          * generic olarak yazilmistir. / Corpyr
          */
-        static public void createFrom<T>(DbSet<T> entities,T data) where T : Data {
+        static public void createFrom<T>(DbSet<T> entities, T data) where T : Data
+        {
 
             entities.Add(data);
 
@@ -38,28 +39,36 @@ namespace KutuphaneSistemi.Database.Manager
          * Sadece bu metodda bir query degiskeni vardir cunku diger islemler komplike sql queryleri icermez.
          * Entity Framework icerisindeki metodlari kullanabiliriz. / Corpyr
          */
-        static public List<Data> readFrom<T>(DbSet<T> entities, String query) where T : Data {
+        static public List<Data> readFrom<T>(DbSet<T> entities, string query) where T : Data
+        {
 
             List<Data> resultDataList = null;
+            List<Data> tempDataList;
 
-            resultDataList = entities.FromSqlRaw(query).ToList<Data>();
-            
+            tempDataList = entities.FromSqlRaw(query).ToList<Data>();
+
+            if(tempDataList != null)
+            {
+                resultDataList = tempDataList;
+            }
+
             return resultDataList;
         }
 
         /* create ve update islemlerinin ayri ayri yazilmasinin nedeni CRUD
          * yapisinin korunmasi ve okunabilirliginj arttirilmasidir. \ Corpyr
          */
-        static public void updateFrom<T> (DbSet<T> entities, T data) where T : Data {
-           
+        static public void updateFrom<T>(DbSet<T> entities, T data) where T : Data
+        {
+
             entities.Update(data); // data veritabaninda yoksa veriyi ekler eger varsa gunceller ama biz verinin veritabanında oldugunu varsayiyoruz. / Corpyr
-        
-        }
-        static public void deleteFrom<T>(DbSet<T> entities, T data) where T : Data {
-          
-            entities.Remove(data);
 
         }
-      
+        static public void deleteFrom<T>(DbSet<T> entities, T data) where T : Data
+        {
+
+            entities.Remove(data);
+        }
+
     }
 }

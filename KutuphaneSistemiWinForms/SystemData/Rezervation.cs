@@ -4,18 +4,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KutuphaneSistemi.SystemData.Member;
+using KutuphaneSistemiWinForms.SystemData.Member;
 
-namespace KutuphaneSistemi.SystemData
+namespace KutuphaneSistemiWinForms.SystemData
 {
     public class Rezervation : Data
     {
         [Key]
         public int rezervationID { get; set; }
-        public NormalMember member { get; set; }
-        public Book book { get; set; }
-
-        public DateTime rezervationTime { get; set; }
+        public int memberID { get; set; }
+        public int bookID { get; set; }
+        public DateTime startTime { get; set; }
+        public int rezOver { get; set; }
 
     }
 }

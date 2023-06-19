@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KutuphaneSistemi.Controller
+namespace KutuphaneSistemiWinForms.Controller
 {
-    public class HistoryController
+    public class HistoryController : BaseController
     {
         public void addHistory()
         {
